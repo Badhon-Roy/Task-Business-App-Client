@@ -9,12 +9,14 @@ import Frame3 from "@/app/assets/Frame 781 (1).png"
 import Frame4 from "@/app/assets/Frame 781 (2).png"
 import Frame1 from "@/app/assets/Frame 781.png"
 import Frame2 from "@/app/assets/Frame 782.png"
+import Vector3 from "@/app/assets/Ellipse 21.png"
 
 const Banner = () => {
     return (
        <div>
          <div className="relative">
             <Image className="absolute left-0" src={Shadow} alt="Shadow Img" width={400} height={400} />
+            <Image className="absolute right-0 lg:-bottom-20 md:bottom-50 -bottom-20" src={Vector3} alt="Vector Img" width={500} height={730} />
             <div className="flex lg:flex-row flex-col-reverse  items-center justify-between xl:px-0 px-4 mt-8 max-w-[1200px] mx-auto">
                 <div className="flex-1 relative" >
 

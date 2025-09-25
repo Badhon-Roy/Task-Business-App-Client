@@ -6,6 +6,8 @@ import EmployeeBannerImg from "@/app/assets/Rectangle 161124259 (1).png"
 import Frame2 from "@/app/assets/Frame 2147227452.png"
 import Frame3 from "@/app/assets/Frame 2147227451.png"
 import Frame4 from "@/app/assets/Frame 2147227453.png"
+import Vector1 from "@/app/assets/Ellipse 21.png"
+
 
 
 const Service = () => {
@@ -37,6 +39,8 @@ const Service = () => {
                 </div>
                 <div className="flex-1 relative lg:mb-0 mb-8" >
                     <Image src={ServiceBannerImg} alt="Service Banner Image" width={800} height={400} />
+                    <Image className="xl:block hidden absolute -right-20 -bottom-30 -z-20" src={Vector1} alt="Vector Img" width={500} height={730} />
+
                     <div className="absolute bottom-0 left-0 w-full lg:h-32 h-16 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
 
                 </div>
@@ -45,6 +49,7 @@ const Service = () => {
             <div className="lg:flex justify-between items-center my-4">
                 <div className="flex-1 relative lg:mb-0 mb-8" >
                     <Image src={OwnerBannerImg} alt="Owner Banner Image" width={800} height={400} />
+                    <Image className=" xl:block hidden absolute -left-30 top-0 rotate-180 -z-20" src={Vector1} alt="Vector Img" width={500} height={730} />
                     <div className="absolute bottom-0 left-0 w-full lg:h-32 h-16 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
 
                 </div>
@@ -69,6 +74,7 @@ const Service = () => {
                 </div>
                 <div className="flex-1 relative lg:mb-0 mb-8" >
                     <Image src={EmployeeBannerImg} alt="Employee Banner Image" width={800} height={400} />
+                    <Image className="xl:block hidden absolute -right-20 -bottom-30 -z-20" src={Vector1} alt="Vector Img" width={500} height={730} />
                     <div className="absolute bottom-0 left-0 w-full lg:h-32 h-16 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
 
                 </div>
