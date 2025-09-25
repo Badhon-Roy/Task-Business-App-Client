@@ -23,7 +23,7 @@ const Banner = () => {
 
                     <h2 className="xl:text-[82px] lg:text-[62px] md:text-[56px] text-[46px]  font-bold text-gray-800 lg:leading-[92px] md:leading-[60px] leading-[50px] lg:text-start text-center lg:mt-0 mt-10 lg:w-full md:w-4/5 w-full md:mx-auto">All Your Jobs One Smart App</h2>
                     <p className="md:w-4/5 lg:text-start text-center mt-8 w-full">Built for business owners, employees, and clients streamline job scheduling, service tracking, and team management in one powerful app.</p>
-                    <Image className="absolute xl:-top-16 lg:-top-14 xl:left-66 top-0 lg:left-45 lg:right-0 md:left-78 right-28 lg:w-[129px] w-[80px]" src={Vector2} alt="Vector Img" width={129} height={134} />
+                    <Image className="absolute xl:-top-15 lg:-top-14 xl:left-62 top-0 lg:left-45 lg:right-0 md:left-78 right-28 lg:w-[129px] w-[80px]" src={Vector2} alt="Vector Img" width={129} height={134} />
                     <Image className="absolute xl:top-[172px] xl:left-[166px] lg:top-[162px] lg:left-[88px] md:top-39 top-34 md:right-56 right-0 xl:w-[420px] lg:w-[350px] w-[250px]" src={Vector1} alt="Vector Img" width={300} height={100} />
 
                     <div className="flex lg:justify-start justify-center gap-[18px]">
