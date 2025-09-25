@@ -4,12 +4,12 @@ import User3Img from "@/app/assets/Ellipse 452 (2).png"
 import Image from "next/image";
 const Testimonial = () => {
     return (
-        <div className="max-w-[1200px] mx-auto mt-32 mb-4 lg:px-0 px-4">
+        <div className="max-w-[1200px] mx-auto mt-32 mb-4 xl:px-0 px-4">
             <div className="text-center">
-                <h2 className="text-[48px] font-bold relative z-10 text-gray-800">What Our Users Are Saying</h2>
+                <h2 className="lg:text-[48px] md:text-[36px] text-[30px] font-bold relative z-10 text-gray-800">What Our Users Are Saying</h2>
 
-                <p className="text-[14px] mt-2 text-gray-600">
-                    Real stories from clients, employees, and business owners who use <br /> our app every day.
+                <p className="text-[14px] mt-2 text-gray-600 w-3/4 mx-auto">
+                    Real stories from clients, employees, and business owners who use our app every day.
                 </p>
             </div>
             <div className="mt-10 grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8">

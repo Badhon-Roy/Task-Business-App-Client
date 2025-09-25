@@ -34,9 +34,9 @@ export default function Faq() {
     };
 
     return (
-        <div className="max-w-[1200px] mx-auto mt-32 mb-4 lg:px-0 px-4">
+        <div className="max-w-[1200px] mx-auto mt-32 mb-4 xl:px-0 px-4">
             <div className="text-center">
-                <h2 className="text-[48px] font-bold relative z-10 text-gray-800">Frequently Asked Questions</h2>
+                <h2 className="lg:text-[48px] md:text-[36px] text-[30px] font-bold relative z-10 text-gray-800">Frequently Asked Questions</h2>
 
                 <p className="text-[14px] mt-2 text-gray-600">
                     Quick answers to help you get the most out of our app.
@@ -75,7 +75,7 @@ export default function Faq() {
                                     exit={{ height: 0, opacity: 0 }}
                                     transition={{ duration: 0.4, ease: "easeInOut" }}
                                 >
-                                    <div className="px-14 pb-6 text-gray-600 text-[14px] leading-relaxed">
+                                    <div className="lg:px-14 px-8 pb-6 text-gray-600 text-[14px] leading-relaxed">
                                         {faq?.answer}
                                     </div>
                                 </motion.div>
