@@ -4,7 +4,7 @@ import { useState, useRef } from "react";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { forgotVerifyOtp, resendOtp, verifyOtp } from "@/app/services/authService";
+import { forgotVerifyOtp, resendOtp } from "@/app/services/authService";
 import { toast } from "sonner";
 
 export default function ForgotVerifyOtp() {

@@ -2,13 +2,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { FieldValues, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
 import { toast } from "sonner";
-import { loginUser, resetPassword } from "@/app/services/authService";
+import { resetPassword } from "@/app/services/authService";
 import { useRouter, useSearchParams } from "next/navigation";
 
 // ✅ Validation schema with Zod
@@ -36,7 +36,6 @@ export default function UpdatePasswordForm() {
             setToken(savedToken);
         } else {
             toast.error("Invalid or expired token");
-            // redirect back to forgot password page
             router.push(`/forgot-verify-otp?email=${encodeURIComponent(email)}`);
         }
     }, [email, router]);
@@ -55,7 +54,7 @@ export default function UpdatePasswordForm() {
         },
     });
 
-    const onSubmit = async (data: any) => {
+    const onSubmit = async (data: FieldValues) => {
         const toastLoading = toast.loading("Resetting password...");
         try {
             const result = await resetPassword(data?.password, data?.password_confirmation, token);

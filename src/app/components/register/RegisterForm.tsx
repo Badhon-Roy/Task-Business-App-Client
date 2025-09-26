@@ -11,6 +11,7 @@ import Link from "next/link";
 import { registerUser } from "@/app/services/authService";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { signIn } from "next-auth/react";
 
 // ✅ Validation schema with Zod
 const schema = z
@@ -208,7 +209,10 @@ export default function RegisterForm() {
                 </div>
 
                 {/* Google Button */}
-                <button className="w-full py-3 border border-gray-300 rounded-lg flex items-center justify-center space-x-2 bg-white text-gray-700 hover:bg-gray-50 transition-colors duration-200">
+                <button 
+                onClick={() => signIn("google",{ callbackUrl: "/" })}
+
+                className="w-full py-3 border border-gray-300 rounded-lg flex items-center justify-center space-x-2 bg-white text-gray-700 hover:bg-gray-50 transition-colors duration-200">
                     <Image
                         src="https://www.svgrepo.com/show/475656/google-color.svg"
                         alt="Google Logo"

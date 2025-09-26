@@ -1,3 +1,5 @@
+"use client";
+
 import UpdatePasswordForm from "@/app/components/updatePassword/UpdatePasswordForm";
 import SubNavbar from "@/app/shared/SubNavbar";
 

@@ -2,7 +2,7 @@ import ForgotVerifyOtp from "@/app/components/forgotVerifyOtp/ForgotVerifyOtp";
 import SubNavbar from "@/app/shared/SubNavbar";
 
 
-const page = () => {
+const ForgetVerifyOtpPage = () => {
     return (
         <div>
             <SubNavbar />
@@ -11,4 +11,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default ForgetVerifyOtpPage;
