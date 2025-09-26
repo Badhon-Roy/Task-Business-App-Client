@@ -8,19 +8,21 @@ import * as z from "zod";
 import Image from "next/image";
 import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
+import { toast } from "sonner";
+import { loginUser } from "@/app/services/authService";
+import { useRouter } from "next/navigation";
 
 // ✅ Validation schema with Zod
 const schema = z
     .object({
         email: z.string().email({ message: "Invalid email address" }),
         password: z.string().min(8, { message: "Password must be at least 8 characters long" }),
-        terms: z.boolean().refine((val) => val === true, {
-            message: "You must agree to the terms",
-        }),
+        remember_me: z.boolean().optional(),
     })
 
 export default function LoginForm() {
     const [showPassword, setShowPassword] = useState(false);
+    const router = useRouter();
     const {
         register,
         handleSubmit,
@@ -31,13 +33,28 @@ export default function LoginForm() {
         defaultValues: {
             email: "",
             password: "",
-            terms: false,
+            remember_me: false,
         },
     });
 
-    const onSubmit = async (data : any) => {
+    const onSubmit = async (data: any) => {
         console.log("Form data submitted:", data);
-        // reset(); // clear form after submit
+        const toastLoading = toast.loading("Logging...")
+        try {
+            const result = await loginUser(data);
+            console.log(result);
+            if (result?.status === 201) {
+                toast.success(result?.message, { id: toastLoading })
+                reset();
+                // Redirect to home page after successful login
+                router.push("/");
+            }
+            else if (result?.status === false || result?.status === 401) {
+                toast.error(result?.message, { id: toastLoading })
+            }
+        } catch (error: any) {
+            toast.error(error.message || "Something went wrong", { id: toastLoading })
+        }
     };
 
     return (
@@ -85,17 +102,17 @@ export default function LoginForm() {
                         )}
                     </div>
 
-                    {/* Terms */}
+                    {/* remember_me */}
                     <div className="flex justify-between">
                         <div className="flex items-center space-x-2 mb-6">
                             <input
                                 type="checkbox"
-                                id="terms"
-                                {...register("terms")}
-                                className={`h-4 w-4 rounded border-gray-300 accent-[#3ba334]  ${errors.terms ? "border-red-500" : "text-green-600 focus:ring-green-500"
+                                id="remember_me"
+                                {...register("remember_me")}
+                                className={`h-4 w-4 rounded border-gray-300 accent-[#3ba334]  ${errors.remember_me ? "border-red-500" : "text-green-600 focus:ring-green-500"
                                     }`}
                             />
-                            <label htmlFor="terms" className="text-sm text-gray-600">
+                            <label htmlFor="remember_me" className="text-sm text-gray-600">
                                 Remember me
                             </label>
                         </div>
@@ -103,9 +120,6 @@ export default function LoginForm() {
                             <Link href={'/resetPassword'} className="text-[#3ba334] hover:underline font-medium text-sm">Forgot password?</Link>
                         </div>
                     </div>
-                    {errors.terms && (
-                        <p className="text-red-500 text-sm mt-1">{errors.terms.message}</p>
-                    )}
 
                     {/* Submit */}
                     <button

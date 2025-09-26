@@ -57,16 +57,16 @@ export default function RegisterForm() {
             const result = await registerUser(data);
             console.log(result);
             if (result?.status === 201) {
-                toast.success(result?.message, { id: toastLoading })
+                toast.success("Please Verify your email!", { id: toastLoading })
                 reset();
-                // Redirect to login page after successful registration
-                router.push("/login");
+                // Redirect to verify page after successful registration
+                router.push(`/verify-otp?email=${encodeURIComponent(data?.email)}`);
             }
-            else if(result?.status === false){
+            else if (result?.status === false) {
                 toast.error(result?.message, { id: toastLoading })
             }
         } catch (error: any) {
-            toast.error(error.message, { id: toastLoading })
+            toast.error(error.message || "Something went wrong", { id: toastLoading })
         }
     };
 

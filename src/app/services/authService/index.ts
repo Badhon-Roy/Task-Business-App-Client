@@ -21,3 +21,37 @@ export const registerUser = async (userData: FieldValues) => {
     const data = await res.json();
     return data;
 }
+
+export const loginUser = async (userData: FieldValues) => {
+    const formData = new FormData();
+    formData.append("email", userData.email);
+    formData.append("password", userData.password);
+    formData.append("remember_me", userData.remember_me ? "true" : "false");
+
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/login`, {
+        method: "POST",
+        body: formData,
+    });
+
+    const data = await res.json();
+    return data;
+};
+
+export const verifyOtp = async (email: string, otp: string) => {
+  try {
+    const formData = new FormData();
+    formData.append("email", email);
+    formData.append("otp", otp);
+
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/verify_otp`, {
+      method: "POST",
+      body: formData,
+    });
+
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
