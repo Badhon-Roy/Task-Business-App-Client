@@ -56,7 +56,8 @@ export default function ForgotVerifyOtp() {
                 setIsSubmitting(false);
 
                 // Redirect to update password page after successful OTP verification
-                router.push("/update-password");
+                localStorage.setItem("forgotPasswordToken", result?.data?.token);
+                router.push(`/update-password?email=${encodeURIComponent(email)}`);
             }
             if (result?.status === 404) {
                 toast.error(result?.message, { id: toastLoading })

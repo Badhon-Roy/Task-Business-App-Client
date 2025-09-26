@@ -108,4 +108,24 @@ export const forgotVerifyOtp = async (email: string, otp: string) => {
   }
 };
 
+export const resetPassword = async (password: string, passwordConfirmation: string, token: string) => {
+  try {
+    const formData = new FormData();
+    formData.append("password", password);
+    formData.append("password_confirmation", passwordConfirmation);
+    formData.append("token", token);
+
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/reset-password`, {
+      method: "POST",
+      body: formData,
+    });
+
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+
 
