@@ -2,33 +2,37 @@
 "use client";
 
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { FieldValues, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import Image from "next/image";
 import { Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
+import { registerUser } from "@/app/services/authService";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 // ✅ Validation schema with Zod
 const schema = z
     .object({
-        firstName: z.string().min(1, { message: "First name is required" }),
-        lastName: z.string().min(1, { message: "Last name is required" }),
+        first_name: z.string().min(1, { message: "First name is required" }),
+        last_name: z.string().min(1, { message: "Last name is required" }),
         email: z.string().email({ message: "Invalid email address" }),
         password: z.string().min(8, { message: "Password must be at least 8 characters long" }),
-        confirmPassword: z.string(),
+        password_confirmation: z.string(),
         terms: z.boolean().refine((val) => val === true, {
             message: "You must agree to the terms",
         }),
     })
-    .refine((data) => data.password === data.confirmPassword, {
+    .refine((data) => data.password === data.password_confirmation, {
         message: "Passwords do not match",
-        path: ["confirmPassword"],
+        path: ["password_confirmation"],
     });
 
 export default function RegisterForm() {
     const [showPassword, setShowPassword] = useState(false);
-    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const [showPassword_confirmation, setShowPassword_confirmation] = useState(false);
+    const router = useRouter();
 
     const {
         register,
@@ -38,18 +42,32 @@ export default function RegisterForm() {
     } = useForm({
         resolver: zodResolver(schema),
         defaultValues: {
-            firstName: "",
-            lastName: "",
+            first_name: "",
+            last_name: "",
             email: "",
             password: "",
-            confirmPassword: "",
+            password_confirmation: "",
             terms: false,
         },
     });
 
-    const onSubmit = async (data: any) => {
-        console.log("Form data submitted:", data);
-        // reset(); // clear form after submit
+    const onSubmit = async (data: FieldValues) => {
+        const toastLoading = toast.loading("Registering...")
+        try {
+            const result = await registerUser(data);
+            console.log(result);
+            if (result?.status === 201) {
+                toast.success(result?.message, { id: toastLoading })
+                reset();
+                // Redirect to login page after successful registration
+                router.push("/login");
+            }
+            else if(result?.status === false){
+                toast.error(result?.message, { id: toastLoading })
+            }
+        } catch (error: any) {
+            toast.error(error.message, { id: toastLoading })
+        }
     };
 
     return (
@@ -67,24 +85,24 @@ export default function RegisterForm() {
                             <input
                                 type="text"
                                 placeholder="First Name"
-                                {...register("firstName")}
-                                className={`w-full h-[56px] p-3 border rounded-lg focus:outline-none focus:ring-2 ${errors.firstName ? "border-red-500" : "border-gray-300 focus:ring-green-500"
+                                {...register("first_name")}
+                                className={`w-full h-[56px] p-3 border rounded-lg focus:outline-none focus:ring-2 ${errors.first_name ? "border-red-500" : "border-gray-300 focus:ring-green-500"
                                     }`}
                             />
-                            {errors.firstName && (
-                                <p className="text-red-500 text-sm mt-1">{errors.firstName.message}</p>
+                            {errors.first_name && (
+                                <p className="text-red-500 text-sm mt-1">{errors.first_name.message}</p>
                             )}
                         </div>
                         <div>
                             <input
                                 type="text"
                                 placeholder="Last Name"
-                                {...register("lastName")}
-                                className={`w-full h-[56px] p-3 border rounded-lg focus:outline-none focus:ring-2 ${errors.lastName ? "border-red-500" : "border-gray-300 focus:ring-green-500"
+                                {...register("last_name")}
+                                className={`w-full h-[56px] p-3 border rounded-lg focus:outline-none focus:ring-2 ${errors.last_name ? "border-red-500" : "border-gray-300 focus:ring-green-500"
                                     }`}
                             />
-                            {errors.lastName && (
-                                <p className="text-red-500 text-sm mt-1">{errors.lastName.message}</p>
+                            {errors.last_name && (
+                                <p className="text-red-500 text-sm mt-1">{errors.last_name.message}</p>
                             )}
                         </div>
                     </div>
@@ -128,22 +146,22 @@ export default function RegisterForm() {
                     {/* Confirm Password */}
                     <div className="relative">
                         <input
-                            type={showConfirmPassword ? "text" : "password"}
+                            type={showPassword_confirmation ? "text" : "password"}
                             placeholder="Confirm Password"
-                            {...register("confirmPassword")}
-                            className={`w-full h-[56px] p-3 pr-10 border rounded-lg focus:outline-none focus:ring-2 ${errors.confirmPassword ? "border-red-500" : "border-gray-300 focus:ring-green-500"
+                            {...register("password_confirmation")}
+                            className={`w-full h-[56px] p-3 pr-10 border rounded-lg focus:outline-none focus:ring-2 ${errors.password_confirmation ? "border-red-500" : "border-gray-300 focus:ring-green-500"
                                 }`}
                         />
                         <span
-                            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                            onClick={() => setShowPassword_confirmation(!showPassword_confirmation)}
                             className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 cursor-pointer"
                         >
                             {
-                                showConfirmPassword ? <EyeOff /> : <Eye />
+                                showPassword_confirmation ? <EyeOff /> : <Eye />
                             }
                         </span>
-                        {errors.confirmPassword && (
-                            <p className="text-red-500 text-sm mt-1">{errors.confirmPassword.message}</p>
+                        {errors.password_confirmation && (
+                            <p className="text-red-500 text-sm mt-1">{errors.password_confirmation.message}</p>
                         )}
                     </div>
 
