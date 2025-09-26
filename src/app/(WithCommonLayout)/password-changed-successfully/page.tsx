@@ -6,7 +6,7 @@ const PasswordChangedSuccessfullyPage = () => {
     return (
         <div>
             <SubNavbar />
-            <div className="flex justify-center items-center min-h-[80vh] w-[506px] mx-auto">
+            <div className="flex justify-center items-center min-h-[80vh] md:w-[480px] w-full lg:px-0 px-4 mx-auto lg:mb-0 mb-20">
                 <div>
                     <Image src={Flower} alt="flower" className="mx-auto mt-10" width={332} height={328} />
                     <div className="mb-[40px] mt-10">

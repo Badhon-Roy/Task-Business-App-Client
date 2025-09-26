@@ -51,7 +51,7 @@ export default function ResetPasswordForm() {
     };
 
     return (
-        <div className="flex justify-center items-center min-h-[80vh] w-[480px] mx-auto">
+        <div className="flex justify-center items-center min-h-[80vh] md:w-[480px] w-full lg:px-0 px-4 mx-auto">
             <div>
                 <Link href={'/login'} className="text-[#3ba334] hover:underline font-medium text-sm flex items-center mb-8">
                     <ChevronLeft size={14} className="mr-2" />

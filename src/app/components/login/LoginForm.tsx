@@ -57,14 +57,14 @@ export default function LoginForm() {
     };
 
     return (
-        <div className="flex justify-center items-center min-h-[80vh]">
+        <div className="flex justify-center items-center min-h-[80vh] md:w-[480px] w-full lg:px-0 px-4 mx-auto lg:mb-0 mb-20">
             <div>
                 <div className="text-center mb-[64px]">
                     <h1 className="text-2xl font-bold text-gray-800">Welcome to ScapeSync</h1>
                     <p className="text-sm text-gray-600 mt-1">Please share your login details so you can access the website.</p>
                 </div>
 
-                <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-4 w-[480px]">
+                <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-4 ">
                     {/* Email */}
                     <div>
                         <input

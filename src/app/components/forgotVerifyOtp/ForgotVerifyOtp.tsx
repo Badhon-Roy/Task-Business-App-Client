@@ -73,7 +73,7 @@ export default function ForgotVerifyOtp() {
     };
 
     return (
-        <div className="flex justify-center items-center min-h-[80vh] px-4">
+        <div className="flex justify-center items-center min-h-[80vh] md:w-[480px] w-full lg:px-0 px-4 mx-auto lg:mb-0 mb-20">
             <div className="max-w-md w-full">
                 {/* Back link */}
                 <Link href="/register" className="text-[#3ba334] hover:underline font-medium text-sm flex items-center mb-8">

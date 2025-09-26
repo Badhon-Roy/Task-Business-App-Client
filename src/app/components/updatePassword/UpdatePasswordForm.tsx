@@ -79,8 +79,8 @@ export default function UpdatePasswordForm() {
     };
 
     return (
-        <div className="flex justify-center items-center min-h-[80vh]">
-            <div className="w-[480px]">
+        <div className="flex justify-center items-center min-h-[80vh] md:w-[480px] w-full lg:px-0 px-4 mx-auto lg:mb-0 mb-20">
+            <div>
                 <div className="mb-[64px]">
                     <h1 className="text-2xl font-bold text-gray-800">Enter your new password.</h1>
                     <p className="text-sm text-gray-600 mt-1">Please enter the email address associated with your account, and we&apos;ll email you a link to reset your password.</p>

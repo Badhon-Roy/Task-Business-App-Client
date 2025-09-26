@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
+
 import { useState, useRef } from "react";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
@@ -71,8 +72,8 @@ export default function VerifyOtp() {
     };
 
     return (
-        <div className="flex justify-center items-center min-h-[80vh] px-4">
-            <div className="max-w-md w-full">
+        <div className="flex justify-center items-center min-h-[80vh] md:w-[480px] w-full lg:px-0 px-4 mx-auto lg:pb-0 pb-20">
+            <div>
                 {/* Back link */}
                 <Link href="/register" className="text-[#3ba334] hover:underline font-medium text-sm flex items-center mb-8">
                     <ChevronLeft size={14} className="mr-2" /> Back
