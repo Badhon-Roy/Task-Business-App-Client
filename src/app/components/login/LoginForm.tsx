@@ -38,12 +38,10 @@ export default function LoginForm() {
     });
 
     const onSubmit = async (data: any) => {
-        console.log("Form data submitted:", data);
         const toastLoading = toast.loading("Logging...")
         try {
             const result = await loginUser(data);
-            console.log(result);
-            if (result?.status === 201) {
+            if (result?.status === 201 || result?.status === true) {
                 toast.success(result?.message, { id: toastLoading })
                 reset();
                 // Redirect to home page after successful login

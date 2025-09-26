@@ -4,7 +4,7 @@ import { useState, useRef } from "react";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { verifyOtp } from "@/app/services/authService";
+import { resendOtp, verifyOtp } from "@/app/services/authService";
 import { toast } from "sonner";
 
 export default function VerifyOtp() {
@@ -45,15 +45,15 @@ export default function VerifyOtp() {
         const toastLoading = toast.loading("Checking...")
 
         try {
-            console.log("Entered OTP:", otp,email);
+            console.log("Entered OTP:", otp, email);
             setError(""); // clear error
 
             const result = await verifyOtp(email, otp);
             console.log("OTP verification result:", result);
-            if(result?.status === true){
+            if (result?.status === true) {
                 toast.success(result?.message || "OTP verified successfully", { id: toastLoading })
                 setIsSubmitting(false);
-                
+
                 // Redirect to login page after successful OTP verification
                 router.push("/login");
             }
@@ -122,7 +122,27 @@ export default function VerifyOtp() {
 
                 <p className="text-sm text-gray-500 mt-4 text-center">
                     Didn&apos;t receive the code?{" "}
-                    <button className="text-green-600 hover:underline">Resend OTP</button>
+                    <button
+                        type="button"
+                        className="text-green-600 hover:underline cursor-pointer font-medium"
+                        onClick={async () => {
+                            if (!email) return;
+                            const toastLoading = toast.loading("Sending...")
+                            try {
+                                const result = await resendOtp(email);
+                                console.log(result);
+                                if (result.status === 201 || result.status === 200) {
+                                    toast.success(result.message, { id: toastLoading })
+                                } else {
+                                    alert(result.message || "Failed to resend OTP");
+                                }
+                            } catch (error: any) {
+                                 toast.error(error.message || "Something went wrong", { id: toastLoading })
+                            }
+                        }}
+                    >
+                        Resend OTP
+                    </button>
                 </p>
             </div>
         </div>

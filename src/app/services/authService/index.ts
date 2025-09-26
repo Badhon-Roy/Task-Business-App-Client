@@ -55,3 +55,21 @@ export const verifyOtp = async (email: string, otp: string) => {
   }
 };
 
+export const resendOtp = async (email: string) => {
+  try {
+    const formData = new FormData();
+    formData.append("email", email);
+
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/resend_otp`, {
+      method: "POST",
+      body: formData,
+    });
+
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+
